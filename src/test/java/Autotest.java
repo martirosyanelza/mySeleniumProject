@@ -17,13 +17,13 @@ public class Autotest {
     public void precondition(){
         System.setProperty("webdriver.chrome.driver","src//main//resources//chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
     @Test(description = "find Mercedes in Auto.am")
             public void searchTest() throws InterruptedException{
 
             driver.get("https://auto.am/");
         Thread.sleep(3000);
-            driver.manage().window().maximize();
             WebElement searchMake = driver.findElement(By.xpath("//*[contains(@aria-labelledby,'make-container')]"));
             searchMake.click();
             Select objMake = new Select(driver.findElement(By.id("filter-make")));
@@ -60,13 +60,13 @@ public class Autotest {
             searchFirstElement.click();
 
         Thread.sleep(7000);
-        WebElement searchPrice= driver.findElement(By.xpath("//div[contains(@class,'top-price')]//ul"));
-        List<WebElement> priceList = searchPrice.findElements(By.tagName("li"));
-        for (WebElement li : priceList) {
-            if (li.getText().contains("$")) {
-                System.out.println("Mercedes-Benz price in US dollars is " + li.getText());
-            }else if (li.getText().contains("֏")) {
-                System.out.println("Mercedes-Benz price in AM drams is " + li.getText());
+//        WebElement searchPrice= driver.findElement(By.xpath("//div[contains(@class,'top-price')]//ul"));
+        List<WebElement> priceList = driver.findElements(By.tagName("//*[@id='pricedown']/li[1]/span"));
+        for (WebElement span : priceList) {
+            if (span.getText().contains("$")) {
+                System.out.println("Mercedes-Benz price in US dollars is " + span.getText());
+            }else if (span.getText().contains("֏")) {
+                System.out.println("Mercedes-Benz price in AM drams is " + span.getText());
             }
         }
         Thread.sleep(5000);

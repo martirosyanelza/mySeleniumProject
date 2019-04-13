@@ -2,7 +2,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="testing">
         <classes>
-            <class name="Autotest"></class>
+            <class name="Amazon"></class>
         </classes>
         <!--<packages>-->
         <!--<package name="firstTestPackage" />-->
