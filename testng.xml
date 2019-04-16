@@ -2,7 +2,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="testing">
         <classes>
-            <class name="Amazon"></class>
+            <class name="AmazonPOM"></class>
         </classes>
         <!--<packages>-->
         <!--<package name="firstTestPackage" />-->
