@@ -2,6 +2,7 @@ package AmazonPackage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
@@ -11,6 +12,9 @@ public class SearchResults extends Settings {
     By viewCard = By.xpath("//div[@role='dialog']//a[@href='/gp/cart/view.html/ref=uss_cart']");
     String text;
 
+    public SearchResults(WebDriver driver) {
+        super(driver);
+    }
     public void chooseElement (){
         waitForElementClickable(listOfElements);
         List<WebElement> results = driver.findElements(listOfElements);

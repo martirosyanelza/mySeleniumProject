@@ -1,7 +1,6 @@
 import AmazonPackage.MyCard;
 import AmazonPackage.SearchResults;
 import AmazonPackage.Homepage;
-import AmazonPackage.Settings;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,18 +24,19 @@ public class AmazonPOM{
 
     @Test(description = "find a headphone in Amazon.com")
     public void searchHeadphones(){
-        Homepage page = new Homepage();
+        Homepage page = new Homepage(driver);
         page.openHomepage("https://www.amazon.com");
         page.performSearch("headphones");
 
-        SearchResults result = new SearchResults();
+        SearchResults result = new SearchResults(driver);
+        result.elementName();
         result.chooseElement();
         result.addToCard();
         result.viewCard();
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
-        MyCard card = new MyCard();
+        MyCard card = new MyCard(driver);
         Assert.assertEquals(result.elementName(),card.checkItem());
     }
 
