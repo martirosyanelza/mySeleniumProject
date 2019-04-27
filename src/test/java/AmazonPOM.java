@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class AmazonPOM{
     WebDriver driver;
+    String text;
 
     @BeforeClass
     public void precondition(){
@@ -29,7 +30,7 @@ public class AmazonPOM{
         page.performSearch("headphones");
 
         SearchResults result = new SearchResults(driver);
-        result.elementName();
+        text = result.elementName();
         result.chooseElement();
         result.addToCard();
         result.viewCard();
@@ -37,7 +38,7 @@ public class AmazonPOM{
         driver.switchTo().window(tabs.get(1));
 
         MyCard card = new MyCard(driver);
-        Assert.assertEquals(result.elementName(),card.checkItem());
+        Assert.assertEquals(text,card.checkItem());
     }
 
     @AfterClass
