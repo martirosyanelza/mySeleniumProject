@@ -1,29 +1,36 @@
 package WorkFront;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Account extends BasePage {
-    By user = By.cssSelector(".btn.dropdown-toggle");
-    By out = By.cssSelector("a[href='/user/logout']");
-    By todo = By.cssSelector("a[href='/user/todos/new']");
-
+    @FindBy(css = ".btn.dropdown-toggle")
+    WebElement userInfo;
+    @FindBy(css = "a[href='/user/logout']")
+    WebElement logoutButton;
+    @FindBy(css = "a[href='/user/todos/new']")
+    WebElement todoButton;
 
     public Account(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void logout(){
-        waitForElementClickable(user);
-        driver.findElement(user).click();
-        waitForElementClickable(out);
-        driver.findElement(out).click();
+    public Homepage logout(){
+        waitForElementClickable(userInfo);
+        userInfo.click();
+        waitForElementClickable(logoutButton);
+        logoutButton.click();
+        return new Homepage(driver);
     }
     public String check(){
-        waitForElementClickable(user);
-        return driver.findElement(user).getText();
+        waitForElementClickable(userInfo);
+        return userInfo.getText();
     }
-    public void openTodo(){
-        waitForElementClickable(todo);
-        driver.findElement(todo).click();
+    public CreateTask openTodo(){
+        waitForElementClickable(todoButton);
+        todoButton.click();
+        return new CreateTask(driver);
     }
 }

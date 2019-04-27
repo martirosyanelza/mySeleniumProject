@@ -1,26 +1,35 @@
 package WorkFront;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class Login extends Registration {
-    By email = By.id("email");
-    By pass = By.id("password");
-    By button = By.xpath("//button[@type='submit']");
+public class Login extends BasePage {
+    @FindBy(id = "email")
+    WebElement email;
+    @FindBy(id = "password")
+    WebElement password;
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement loginButton;
 
     public Login(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void enterEmail(String input){
+    public Login enterEmail(String input){
         waitForElementVisible(email);
-        driver.findElement(email).sendKeys(input);
+        email.sendKeys(input);
+        return new Login(driver);
     }
-    public void enterPassword(String input){
-        waitForElementVisible(pass);
-        driver.findElement(pass).sendKeys(input);
+    public Login enterPassword(String input){
+        waitForElementVisible(password);
+        password.sendKeys(input);
+        return new Login(driver);
     }
-    public void login(){
-        waitForElementClickable(button);
-        driver.findElement(button).click();
+    public Account login(){
+        waitForElementClickable(loginButton);
+        loginButton.click();
+        return new Account(driver);
     }
 }

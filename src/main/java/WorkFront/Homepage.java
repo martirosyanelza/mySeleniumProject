@@ -1,26 +1,32 @@
 package WorkFront;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Homepage extends BasePage{
-    By reg = By.xpath("//ul[@class='nav pull-right']//a[@href='/register']");
-    By login = By.xpath("//ul[@class='nav pull-right']//a[@href='/login']");
-
-
+    @FindBy(xpath = "//ul[@class='nav pull-right']//a[@href='/register']")
+    WebElement regButton;
+    @FindBy(xpath = "//ul[@class='nav pull-right']//a[@href='/login']")
+    WebElement loginButton;
 
     public Homepage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void openHomepage(String url){
+    public Homepage open (String url){
         driver.get(url);
+        return new Homepage(driver);
     }
-    public void openRegForm () {
-        waitForElementClickable(reg);
-        driver.findElement(reg).click();
+    public Registration openRegForm(){
+        waitForElementClickable(regButton);
+        regButton.click();
+        return new Registration(driver);
     }
-    public void openLoginForm(){
-        waitForElementClickable(login);
-        driver.findElement(login).click();
+    public Login openLoginForm(){
+        waitForElementClickable(loginButton);
+        loginButton.click();
+        return new Login(driver);
     }
 }

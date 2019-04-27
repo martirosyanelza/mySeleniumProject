@@ -1,37 +1,49 @@
 package WorkFront;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Registration extends BasePage {
-    By name = By.id("name");
-    By email = By.id("email");
-    By pass = By.id("password");
-    By confirm = By.id("confirmationPassword");
-    By button = By.xpath("//button[@type='submit']");
-
+    @FindBy(id = "name")
+    WebElement name;
+    @FindBy(id = "email")
+    WebElement email;
+    @FindBy(id = "password")
+    WebElement password;
+    @FindBy(id = "confirmationPassword")
+    WebElement confirm;
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement regButton;
 
     public Registration(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(this.driver, this);
     }
-    public void enterName(String input){
+    public Registration enterName(String input){
         waitForElementVisible(name);
-        driver.findElement(name).sendKeys(input);
+        name.sendKeys(input);
+        return new Registration(driver);
     }
-    public void enterEmail(String input){
+    public Registration enterEmail(String input){
         waitForElementVisible(email);
-        driver.findElement(email).sendKeys(input);
+        email.sendKeys(input);
+        return new Registration(driver);
     }
-    public void enterPass(String input){
-        waitForElementVisible(pass);
-        driver.findElement(pass).sendKeys(input);
+    public Registration enterPass(String input){
+        waitForElementVisible(password);
+        password.sendKeys(input);
+        return new Registration(driver);
     }
-    public void enterPassc(String input){
+    public Registration enterPassc(String input){
         waitForElementVisible(confirm);
-        driver.findElement(confirm).sendKeys(input);
+        confirm.sendKeys(input);
+        return new Registration(driver);
     }
-    public void submit(){
-        waitForElementClickable(button);
-        driver.findElement(button).click();
+    public Account submit(){
+        waitForElementClickable(regButton);
+        regButton.click();
+        return new Account(driver);
     }
 }
