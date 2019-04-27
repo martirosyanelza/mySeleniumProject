@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class Task extends BasePage {
+public class CreateTask extends BasePage {
     By title = By.id("title");
     By date = By.id("dueDate");
     By month = By.xpath("//th[@class='switch'][1]");
@@ -12,7 +12,7 @@ public class Task extends BasePage {
     By priority = By.id("priority");
     By button = By.xpath("//button[@class='btn btn-primary']");
 
-    public Task(WebDriver driver){
+    public CreateTask(WebDriver driver){
         super(driver);
     }
     public void enterTitle(String input){

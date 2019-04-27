@@ -20,7 +20,6 @@ public class Account extends BasePage {
     }
     public String check(){
         waitForElementClickable(user);
-        System.out.println(driver.findElement(user).getText());
         return driver.findElement(user).getText();
     }
     public void openTodo(){

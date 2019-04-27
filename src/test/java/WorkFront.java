@@ -2,11 +2,13 @@ import WorkFront.Homepage;
 import WorkFront.Registration;
 import WorkFront.Account;
 import WorkFront.Login;
-import WorkFront.Task;
+import WorkFront.CreateTask;
+import WorkFront.TaskList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,7 +31,7 @@ public class WorkFront {
 
         Registration reg = new Registration(driver);
         reg.enterName("elza");
-        reg.enterEmail("elza+4@gmail.com");
+        reg.enterEmail("elza+9@gmail.com");
         reg.enterPass("nbnbnb");
         reg.enterPassc("nbnbnb");
         reg.submit();
@@ -39,17 +41,25 @@ public class WorkFront {
         page.openLoginForm();
 
         Login login = new Login(driver);
-        login.enterEmail("elza+4@gmail.com");
+        login.enterEmail("elza+9@gmail.com");
         login.enterPassword("nbnbnb");
         login.login();
         Assert.assertTrue(account.check().contains("elza"));
 
         account.openTodo();
 
-        Task task = new Task(driver);
+        CreateTask task = new CreateTask(driver);
         task.enterTitle("Workfront homework");
         task.pickADate();
         task.choosePriority();
         task.createTask();
+
+        TaskList list = new TaskList(driver);
+        Assert.assertTrue(list.checkTask().contains("homework"));
+    }
+    @AfterClass
+    public void postCondition(){
+        driver.close();
+        driver.quit();
     }
 }
