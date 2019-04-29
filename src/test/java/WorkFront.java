@@ -1,8 +1,5 @@
 import WorkFront.Homepage;
-import WorkFront.Registration;
 import WorkFront.Account;
-import WorkFront.Login;
-import WorkFront.CreateTask;
 import WorkFront.TaskList;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,30 +24,24 @@ public class WorkFront {
     public void Homework(){
         Homepage page = new Homepage(driver);
         page.open("https://ancient-taiga-22967.herokuapp.com/");
-        page.openRegForm();
-
-        new Registration(driver).enterName("elza")
-                .enterEmail("elza+11@gmail.com")
+        page.openRegForm()
+                .enterName("elza")
+                .enterEmail("elza+5@gmail.com")
                 .enterPass("nbnbnb")
                 .enterPassc("nbnbnb")
                 .submit();
-
         Account account = new Account(driver);
-        account.logout();
-        page.openLoginForm();
-
-        new Login(driver).enterEmail("elza+11@gmail.com")
+        account.logout()
+                .openLoginForm()
+                .enterEmail("elza+5@gmail.com")
                 .enterPassword("nbnbnb")
                 .login();
         Assert.assertTrue(account.check().contains("elza"));
-
-        account.openTodo();
-
-        new CreateTask(driver).enterTitle("Workfront homework")
+        account.openTodo()
+                .enterTitle("Workfront homework")
                 .pickADate()
                 .choosePriority()
                 .createTask();
-
         TaskList list = new TaskList(driver);
         Assert.assertTrue(list.checkTask().contains("homework"));
     }
